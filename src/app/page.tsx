@@ -112,13 +112,13 @@ export default function Home() {
             <div className="flex gap-4">
               <button
                 onClick={handleSpin}
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
+                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#2c2c2c] text-[#f0f0f0] gap-2 hover:bg-[#1a1a1a]  font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto cursor-pointer"
               >
                 Spin the Wheel!
               </button>
               <button
                 onClick={resetWheel}
-                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-red-500 text-white gap-2 hover:bg-red-600 font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
+                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-red-500 text-white gap-2 hover:bg-red-600 font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto cursor-pointer"
               >
                 Reset
               </button>
