@@ -12,7 +12,7 @@ export default function Home() {
   const wheelRef = useRef<WheelRef>(null);
   const modalRef = useRef<ModalWithCanvasConfettiRef>(null);
 
-  const [wheelData, setWheelData] = useState<{label: string}[]>([]);
+  const [wheelData, setWheelData] = useState<{ label: string }[]>([]);
   const [newPrize, setNewPrize] = useState("");
   const [isDataSubmitted, setIsDataSubmitted] = useState(false);
 
@@ -35,25 +35,26 @@ export default function Home() {
   const handleSpin = () => {
     if (wheelRef.current) {
       const restrictedTerms = ['front end', 'fe', 'frontend', 'front', 'font'];
-      
+
       // Filter out restricted prizes
-      const allowedPrizes = wheelData.filter(prize => 
-        !restrictedTerms.some(term => 
+      const allowedPrizes = wheelData.filter(prize =>
+        !restrictedTerms.some(term =>
           prize.label.toLowerCase().includes(term.toLowerCase())
         )
       );
 
+      let originalIndex = 0;
+
       if (allowedPrizes.length === 0) {
-        alert("No valid prizes available to spin!");
-        return;
+        originalIndex = Math.floor(Math.random() * wheelData.length);
+      } else {
+        const randomIndex = Math.floor(Math.random() * allowedPrizes.length);
+        const selectedPrize = allowedPrizes[randomIndex];
+        originalIndex = wheelData.findIndex(prize => prize.label === selectedPrize.label);
       }
 
-      const randomIndex = Math.floor(Math.random() * allowedPrizes.length);
-      const selectedPrize = allowedPrizes[randomIndex];
-      
-      // Find the original index of the selected prize
-      const originalIndex = wheelData.findIndex(prize => prize.label === selectedPrize.label);
-      
+
+
       wheelRef.current.handleSpinClick(originalIndex, (winningIndex: number) => {
         modalRef.current?.open({ content: `Xin chúc mừng: ${wheelData[winningIndex].label}` });
       });
@@ -69,7 +70,7 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center w-full max-w-4xl">
         <h1 className="text-3xl font-bold text-center">Lucky Spin Wheel</h1>
-        
+
         {!isDataSubmitted ? (
           <div className="w-full max-w-md space-y-4">
             <form onSubmit={handleAddPrize} className="flex gap-2">
@@ -108,7 +109,7 @@ export default function Home() {
           <>
             {/* @ts-expect-error - This is a workaround to fix the type error */}
             <SpinWheelWrapper ref={wheelRef} data={wheelData} />
-            
+
             <div className="flex gap-4">
               <button
                 onClick={handleSpin}
