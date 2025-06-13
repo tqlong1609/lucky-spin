@@ -34,24 +34,24 @@ export default function Home() {
 
   const handleSpin = () => {
     if (wheelRef.current) {
-      const restrictedTerms = ['front end', 'fe', 'frontend', 'front', 'font'];
+      // const restrictedTerms = ['front end', 'fe', 'frontend', 'front', 'font'];
 
       // Filter out restricted prizes
-      const allowedPrizes = wheelData.filter(prize =>
-        !restrictedTerms.some(term =>
-          prize.label.toLowerCase().includes(term.toLowerCase())
-        )
-      );
+      // const allowedPrizes = wheelData.filter(prize =>
+      //   !restrictedTerms.some(term =>
+      //     prize.label.toLowerCase().includes(term.toLowerCase())
+      //   )
+      // );
 
-      let originalIndex = 0;
+      const originalIndex = Math.floor(Math.random() * wheelData.length)
 
-      if (allowedPrizes.length === 0) {
-        originalIndex = Math.floor(Math.random() * wheelData.length);
-      } else {
-        const randomIndex = Math.floor(Math.random() * allowedPrizes.length);
-        const selectedPrize = allowedPrizes[randomIndex];
-        originalIndex = wheelData.findIndex(prize => prize.label === selectedPrize.label);
-      }
+      // if (allowedPrizes.length === 0) {
+      //   originalIndex = Math.floor(Math.random() * wheelData.length);
+      // } else {
+      //   const randomIndex = Math.floor(Math.random() * allowedPrizes.length);
+      //   const selectedPrize = allowedPrizes[randomIndex];
+      //   originalIndex = wheelData.findIndex(prize => prize.label === selectedPrize.label);
+      // }
 
 
 
